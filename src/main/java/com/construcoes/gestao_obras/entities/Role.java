@@ -1,0 +1,33 @@
+package com.construcoes.gestao_obras.entities;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+@Entity
+@Table(name = "tb_roles")
+public class Role {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
+    private Long roleId;
+
+    private String name;
+
+    public enum Values{
+        ADMIN,
+        BASIC;
+
+        public static Role.Values fromString(String name) {
+            for (Role.Values value : Role.Values.values()) {
+                if (value.name().equalsIgnoreCase(name)) {
+                    return value;
+                }
+            }
+            throw new IllegalArgumentException("Role not found: " + name);
+        }
+    }
+}
