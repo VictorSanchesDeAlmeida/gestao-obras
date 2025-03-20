@@ -6,6 +6,8 @@ Esta API foi desenvolvida para facilitar a gestão de obras, oferecendo funciona
 acompanhamento de tarefas, gestão de materiais e monitoramento de prazos. Com uma arquitetura eficiente e segura, a API
 permite integração com sistemas externos e fornece endpoints otimizados para um fluxo de trabalho ágil e organizado.
 
+---
+
 ## Autenticação - Rota /login
 
 A rota ``/login`` é responsável por autenticar usuários e gerar um token JWT para acesso seguro ao sistema.
@@ -50,13 +52,13 @@ A rota ``/login`` é responsável por autenticar usuários e gerar um token JWT 
 
 ---
 
-## Cadastrar obra - Rota `POST` /{id}/work
+## Cadastrar obra - Rota `POST` /{userId}/work
 
-A rota ``/{id}/work`` é responsável por cadastrar obras ao sistema referentes a um determinado usuário.
+A rota ``/{userId}/work`` é responsável por cadastrar obras ao sistema referentes a um determinado usuário.
 
 ### **Requisição**
 
-* **Endpoint:** `/{id}/work`
+* **Endpoint:** `/{userId}/work`
 * **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
 * **Corpo da Requisição:**
 
@@ -89,15 +91,14 @@ A rota ``/{id}/work`` é responsável por cadastrar obras ao sistema referentes 
 
 ---
 
-## Listar obras por usuário - Rota `GET` /{id}/work
+## Listar obras por usuário - Rota `GET` /{userId}/work
 
-A rota ``/{id}/work`` é responsável por listar obras referentes usuário logado.
+A rota ``/{userId}/work`` é responsável por listar obras referentes usuário logado.
 
 ### **Requisição**
 
-* **Endpoint:** `/{id}/work`
+* **Endpoint:** `/{userId}/work`
 * **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
-* **Corpo da Requisição:**
 
 ### Resposta
 
@@ -119,6 +120,79 @@ A rota ``/{id}/work`` é responsável por listar obras referentes usuário logad
     "userId": "b18741d4-cc55-4745-bb86-dd9ed46c0619"
   }
 ]
+```
+
+### Possíveis Erros
+
+| Código |             Mensagem             |
+|:------:|:--------------------------------:|
+|  401   | ``{"error": "not authorized!"}`` |
+
+---
+
+## Atualizar obra - Rota `PUT` /{userId}/work
+
+A rota ``/{userId}/work`` é responsável por atualizar as informações de uma obra.
+
+### **Requisição**
+
+* **Endpoint:** `/{userId}/work`
+* **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
+* **Corpo da Requisição:**
+
+```JSON
+{
+    "workId": 6,
+    "name": "Exemplo",
+    "location": "Parana"
+}
+```
+
+### Resposta
+
+* **Código de Status:** 200 OK (em caso de sucesso)
+* **Corpo da Resposta:**
+
+```JSON
+{
+    "workId": 6,
+    "name": "Exemplo",
+    "location": "Parana",
+    "userId": "b18741d4-cc55-4745-bb86-dd9ed46c0619"
+}
+```
+
+### Possíveis Erros
+
+| Código |             Mensagem             |
+|:------:|:--------------------------------:|
+|  401   | ``{"error": "not authorized!"}`` |
+
+---
+
+## Deletar obra - Rota `DELETE` /{userId}/work
+
+A rota ``/{userId}/work`` é responsável por deletar uma obra referente tendo en vista o id da mesma.
+
+### **Requisição**
+
+* **Endpoint:** `/{userId}/work`
+* **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
+* **Corpo da Requisição:**
+
+```JSON
+{
+    "workId": 6
+}
+```
+
+### Resposta
+
+* **Código de Status:** 200 OK (em caso de sucesso)
+* **Corpo da Resposta:**
+
+```JSON
+"OK"
 ```
 
 ### Possíveis Erros

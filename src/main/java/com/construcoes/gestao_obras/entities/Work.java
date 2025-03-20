@@ -23,6 +23,15 @@ public class Work {
         return user;
     }
 
+    public Work(){}
+
+    public Work(Long workId, String name, String location, User user){
+        this.workId = workId;
+        this.name = name;
+        this.location = location;
+        this.user = user;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
