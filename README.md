@@ -46,3 +46,83 @@ A rota ``/login`` é responsável por autenticar usuários e gerar um token JWT 
 | Código |                   Mensagem                    |
 |:------:|:---------------------------------------------:|
 |  401   | ``{"error": "User or password is invalid!"}`` |
+
+
+---
+
+## Cadastrar obra - Rota `POST` /{id}/work
+
+A rota ``/{id}/work`` é responsável por cadastrar obras ao sistema referentes a um determinado usuário.
+
+### **Requisição**
+
+* **Endpoint:** `/{id}/work`
+* **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
+* **Corpo da Requisição:**
+
+```JSON
+{
+  "name": "Nome da obra",
+  "location": "Endereço"
+}
+```
+
+### Resposta
+
+* **Código de Status:** 200 OK (em caso de sucesso)
+* **Corpo da Resposta:**
+
+```JSON
+{
+  "workId": 4,
+  "name": "Exemplo",
+  "location": "Rio de Janeiro",
+  "userId": "b18741d4-cc55-4745-bb86-dd9ed46c0619"
+}
+```
+
+### Possíveis Erros
+
+| Código |             Mensagem             |
+|:------:|:--------------------------------:|
+|  401   | ``{"error": "not authorized!"}`` |
+
+---
+
+## Listar obras por usuário - Rota `GET` /{id}/work
+
+A rota ``/{id}/work`` é responsável por listar obras referentes usuário logado.
+
+### **Requisição**
+
+* **Endpoint:** `/{id}/work`
+* **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
+* **Corpo da Requisição:**
+
+### Resposta
+
+* **Código de Status:** 200 OK (em caso de sucesso)
+* **Corpo da Resposta:**
+
+```JSON
+[
+  {
+    "workId": 4,
+    "name": "Exemplo",
+    "location": "Rio de Janeiro",
+    "userId": "b18741d4-cc55-4745-bb86-dd9ed46c0619"
+  },
+  {
+    "workId": 5,
+    "name": "Exemplo",
+    "location": "São paulo",
+    "userId": "b18741d4-cc55-4745-bb86-dd9ed46c0619"
+  }
+]
+```
+
+### Possíveis Erros
+
+| Código |             Mensagem             |
+|:------:|:--------------------------------:|
+|  401   | ``{"error": "not authorized!"}`` |

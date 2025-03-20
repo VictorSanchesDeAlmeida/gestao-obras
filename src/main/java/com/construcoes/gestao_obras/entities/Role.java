@@ -1,11 +1,7 @@
 package com.construcoes.gestao_obras.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 @Entity
 @Table(name = "tb_roles")
 public class Role {
@@ -29,5 +25,21 @@ public class Role {
             }
             throw new IllegalArgumentException("Role not found: " + name);
         }
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
