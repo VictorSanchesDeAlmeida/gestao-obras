@@ -52,6 +52,7 @@ public class TokenController {
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiresIn))
                 .claim("scope", scopes)
+                .claim("userId", user.get().getUserId())
                 .build();
 
         var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();

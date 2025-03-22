@@ -71,7 +71,7 @@ A rota ``/{userId}/work`` é responsável por cadastrar obras ao sistema referen
 
 ### Resposta
 
-* **Código de Status:** 200 OK (em caso de sucesso)
+* **Código de Status:** 201 CREATED (em caso de sucesso)
 * **Corpo da Resposta:**
 
 ```JSON
@@ -193,6 +193,147 @@ A rota ``/{userId}/work`` é responsável por deletar uma obra referente tendo e
 
 ```JSON
 "OK"
+```
+
+### Possíveis Erros
+
+| Código |             Mensagem             |
+|:------:|:--------------------------------:|
+|  401   | ``{"error": "not authorized!"}`` |
+
+---
+
+## Cadastrar contrato - Rota `POST` /{userId}/work/{workId}/work
+
+A rota ``/{userId}/work/{workId}/work`` é responsável por cadastrar contratos ao sistema referentes a um determinado usuário.
+
+### **Requisição**
+
+* **Endpoint:** `/{userId}/work/{workId}/work`
+* **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
+* **Corpo da Requisição:**
+
+```JSON
+{
+  "title": "Titulo do contrato"
+}
+```
+
+### Resposta
+
+* **Código de Status:** 201 CREATED (em caso de sucesso)
+* **Corpo da Resposta:**
+
+```JSON
+{
+  "contractId": 1,
+  "title": "Teste",
+  "workId": 7
+}
+```
+
+### Possíveis Erros
+
+| Código |             Mensagem             |
+|:------:|:--------------------------------:|
+|  401   | ``{"error": "not authorized!"}`` |
+
+---
+
+## Listar contrato - Rota `GET` /{userId}/work/{workId}/work
+
+A rota ``/{userId}/work/{workId}/work`` é responsável por cadastrar contratos ao sistema referentes a um determinado usuário.
+
+### **Requisição**
+
+* **Endpoint:** `/{userId}/work/{workId}/work`
+* **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
+
+### Resposta
+
+* **Código de Status:** 200 OK (em caso de sucesso)
+* **Corpo da Resposta:**
+
+```JSON
+[
+  {
+    "contractId": 1,
+    "title": "Teste",
+    "workId": 7
+  },
+  {
+    "contractId": 3,
+    "title": "São roque",
+    "workId": 7
+  }
+]
+```
+
+### Possíveis Erros
+
+| Código |             Mensagem             |
+|:------:|:--------------------------------:|
+|  401   | ``{"error": "not authorized!"}`` |
+
+---
+
+## Deletar contrato - Rota `DELETE` /{userId}/work/{workId}/work
+
+A rota ``/{userId}/work/{workId}/work`` é responsável por deletar contratos do sistema referentes a um determinado usuário e obra.
+
+### **Requisição**
+
+* **Endpoint:** `/{userId}/work/{workId}/work`
+* **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
+* **Corpo da Requisição:**
+
+```JSON
+{
+  "contractId": 2
+}
+```
+
+### Resposta
+
+* **Código de Status:** 200 OK (em caso de sucesso)
+
+### Possíveis Erros
+
+
+| Código |             Mensagem             |
+|:------:|:--------------------------------:|
+|  401   | ``{"error": "not authorized!"}`` |
+
+---
+
+## Atualizar contrato - Rota `PUT` /{userId}/work/{workId}/work
+
+A rota ``/{userId}/work/{workId}/work`` é responsável por atualizar contratos do sistema referentes a um determinado usuário e obra.
+
+### **Requisição**
+
+* **Endpoint:** `/{userId}/work/{workId}/work`
+* **Headers:** `Content-Type: application/json`, `Authorization: Bearer <TOKEN_JWT>`
+* **Corpo da Requisição:**
+
+```JSON
+{
+  "contractId": 3,
+  "title": "São roque"
+}
+```
+
+### Resposta
+
+* **Código de Status:** 200 OK (em caso de sucesso)
+* **Corpo da Resposta:**
+
+```JSON
+{
+  "contractId": 1,
+  "title": "Teste",
+  "workId": 7
+}
 ```
 
 ### Possíveis Erros

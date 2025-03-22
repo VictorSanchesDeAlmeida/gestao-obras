@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -35,9 +37,14 @@ public class WorkController {
         work.setLocation(createWorkRequest.location());
         work.setUser(user);
 
-        workRepository.save(work);
+        work = workRepository.save(work);
 
-        return ResponseEntity.ok(new WorkResponse(
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{workId}")
+                .buildAndExpand(work.getWorkId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(new WorkResponse(
                 work.getWorkId(),
                 work.getName(),
                 work.getLocation(),
@@ -47,7 +54,6 @@ public class WorkController {
     }
 
     @GetMapping("/{userId}/work")
-    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<List<WorkResponse>> listWorkByUser(@PathVariable UUID userId){
         User user = new User();
         user.setUserId(userId);
@@ -67,11 +73,9 @@ public class WorkController {
 
     @DeleteMapping("/{userId}/work")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
-    public ResponseEntity<HttpStatusCode> deleteWork(@RequestBody WorkRequest workRequest){
-
+    public ResponseEntity<Void> deleteWork(@RequestBody WorkRequest workRequest){
         workRepository.deleteById(workRequest.workId());
-        return ResponseEntity.ok(HttpStatusCode.valueOf(200));
-
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{userId}/work")
