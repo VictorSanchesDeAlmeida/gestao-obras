@@ -11,7 +11,6 @@ public class Contract {
     @Column(name = "contract_id")
     private Long contractId;
 
-
     private String title;
 
     @ManyToOne

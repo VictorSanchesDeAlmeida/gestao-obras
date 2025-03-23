@@ -6,7 +6,6 @@ import com.construcoes.gestao_obras.entities.User;
 import com.construcoes.gestao_obras.entities.Work;
 import com.construcoes.gestao_obras.repository.WorkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;

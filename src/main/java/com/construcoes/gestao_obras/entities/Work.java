@@ -1,6 +1,8 @@
 package com.construcoes.gestao_obras.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_works")
@@ -19,9 +21,6 @@ public class Work {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public User getUser() {
-        return user;
-    }
 
     public Work(){}
 
@@ -29,10 +28,6 @@ public class Work {
         this.workId = workId;
         this.name = name;
         this.location = location;
-        this.user = user;
-    }
-
-    public void setUser(User user) {
         this.user = user;
     }
 
@@ -58,5 +53,13 @@ public class Work {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
